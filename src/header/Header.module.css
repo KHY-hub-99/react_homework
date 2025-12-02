@@ -1,0 +1,60 @@
+/* Header.module.css */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--color-accent-bg);
+  border-bottom: 1px solid var(--color-light-grey);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  margin-bottom: 1rem;
+}
+
+.totalDisplay {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: #ffe0e0; /* 연한 포인트 색상 배경 */
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--color-text);
+  border: 1px solid #ffb3b3;
+}
+
+.totalAmount {
+  font-weight: 700;
+  color: var(--color-point); /* 강조 색상 */
+  margin-left: 0.5rem;
+  font-size: 1.15rem;
+}
+
+.filters {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+}
+
+.filter {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 400;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+  color: var(--color-grey);
+  background-color: var(--color-light-grey);
+}
+
+.filter:hover {
+  background-color: #ddd;
+}
+
+.selected {
+  background-color: var(--color-point);
+  color: white;
+  font-weight: 700;
+}

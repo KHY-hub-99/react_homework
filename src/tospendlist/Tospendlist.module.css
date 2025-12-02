@@ -1,0 +1,12 @@
+/* Tospendlist.module.css */
+.section {
+  padding: 0 1.5rem;
+  max-height: calc(100vh - 12rem); /* 헤더와 푸터 공간 제외 */
+  overflow-y: auto;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
