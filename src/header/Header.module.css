@@ -1,60 +1,123 @@
-/* Header.module.css */
+/* 전체 헤더 레이아웃 */
 .header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  background-color: var(--color-accent-bg);
-  border-bottom: 1px solid var(--color-light-grey);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  margin-bottom: 1rem;
-}
-
-.totalDisplay {
+  align-items: center; /* 세로 중앙 정렬 */
   width: 100%;
-  padding: 0.8rem 1rem;
-  background-color: #ffe0e0; /* 연한 포인트 색상 배경 */
-  border-radius: 6px;
-  margin-bottom: 1rem;
-  text-align: center;
-  font-size: 1rem;
-  color: var(--color-text);
-  border: 1px solid #ffb3b3;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+  box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
 }
 
-.totalAmount {
-  font-weight: 700;
-  color: var(--color-point); /* 강조 색상 */
-  margin-left: 0.5rem;
-  font-size: 1.15rem;
-}
-
+/* ⭐️ 핵심 포인트!
+  필터(네비게이션)에 margin-left: auto를 주면
+  왼쪽 공간을 모두 밀어내고 스스로 오른쪽 끝으로 갑니다.
+*/
 .filters {
+  margin-left: auto;
+
   display: flex;
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 6px;
+  margin-bottom: 0; /* margin 초기화 */
+  margin-top: 0; /* margin 초기화 */
   gap: 0.5rem;
+
+  /* 필터 배경 (유리 효과) */
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
+/* 완료된 지출 합계 (왼쪽 고정) */
+.totalDisplay {
+  /* 오른쪽 마진을 줘서 필터와 너무 붙지 않게 함 */
+  margin-right: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+
+  /* 유리 카드 스타일 */
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4b5563;
+
+  animation: fadeIn 0.4s ease-out;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  white-space: nowrap; /* 글자가 줄바꿈되지 않도록 */
+}
+
+/* --- 아래는 이전과 동일한 스타일 유지 --- */
+
 .filter {
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: 400;
-  transition: all 0.2s;
+  padding: 8px 16px; /* 크기 살짝 조정 */
   font-size: 0.9rem;
-  color: var(--color-grey);
-  background-color: var(--color-light-grey);
+  font-weight: 600;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filter:hover {
-  background-color: #ddd;
+  color: #4b5563;
+  background: rgba(255, 255, 255, 0.5);
 }
 
-.selected {
-  background-color: var(--color-point);
+.filter.selected {
   color: white;
-  font-weight: 700;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  transform: scale(1.05);
+}
+
+.totalAmount {
+  font-size: 1.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #6366f1, #d946ef);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 모바일 반응형: 화면이 좁아지면 줄바꿈 처리 */
+@media (max-width: 600px) {
+  .header {
+    flex-wrap: wrap; /* 줄바꿈 허용 */
+    gap: 10px;
+  }
+
+  .filters {
+    margin-left: 0; /* 모바일에서는 자동 마진 해제 */
+    width: 100%;
+    justify-content: center; /* 가운데 정렬 */
+    order: 1; /* 필터를 위로 */
+  }
+
+  .totalDisplay {
+    width: 100%;
+    justify-content: center;
+    margin-right: 0;
+    order: 2; /* 합계를 아래로 */
+  }
 }

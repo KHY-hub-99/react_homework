@@ -1,12 +1,181 @@
-/* Tospendlist.module.css */
+/* 섹션: 전체 컨테이너 */
 .section {
-  padding: 0 1.5rem;
-  max-height: calc(100vh - 12rem); /* 헤더와 푸터 공간 제외 */
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* 리스트와 입력 폼 사이 간격 */
+  width: 100%;
+  max-width: 600px; /* 폼, 헤더와 너비 통일감 유지 */
+  margin: 0 auto;
+  padding: 0 1rem 3rem 1rem; /* 하단 여백 넉넉히 */
 }
 
+/* 리스트 (ul) 스타일 */
 .list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* 카드 사이의 간격 */
+}
+
+/* 💎 [중요] Tospend 아이템 (li) 스타일 */
+/* Tospend 컴포넌트의 최상위 태그(li)에 className={styles.item}을 주시면 됩니다 */
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem;
+
+  /* 유리 카드 효과 (폼과 통일) */
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+
+  /* 그림자 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 10px 15px rgba(0, 0, 0, 0.03);
+
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideIn 0.4s ease-out forwards;
+}
+
+/* 아이템 호버 시 둥실 떠오르는 효과 */
+.item:hover {
+  transform: translateY(-3px) scale(1.01);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.1),
+    /* 보라색 계열 그림자 */ 0 4px 8px rgba(0, 0, 0, 0.05);
+  border-color: #a5b4fc; /* 테두리 살짝 보라색으로 */
+}
+
+/* 아이템 내부 텍스트 그룹 (장소, 내용) */
+.infoGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1; /* 남은 공간 차지 */
+  margin-right: 1rem;
+}
+
+.place {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.content {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* 날짜 및 시간 텍스트 스타일 */
+.dateTime {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 2px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* 금액 및 버튼 그룹 */
+.actionGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.amount {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #4b5563;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 지출 완료 시 금액에 취소선 등의 효과 */
+.amount.completed {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+/* 삭제 버튼 (아이콘 형태 권장) */
+.deleteButton {
+  background: rgba(239, 68, 68, 0.1); /* 옅은 빨강 배경 */
+  color: #0e1eb1;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%; /* 동그라미 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.deleteButton:hover {
+  background: #0e1eb1;
+  color: white;
+  transform: rotate(90deg); /* 호버 시 회전 효과 */
+}
+
+/* 체크박스 커스텀 (브라우저 기본 체크박스 숨기고 디자인) */
+.checkbox {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%; /* 동그란 체크박스 */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  margin-right: 12px;
+}
+
+.checkbox:checked {
+  background-color: #8b5cf6; /* 보라색 */
+  border-color: #8b5cf6;
+}
+
+/* 체크박스 체크 시 내부 v 표시 (CSS로 그림) */
+.checkbox:checked::after {
+  content: "✔";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+}
+
+/* 등장 애니메이션 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 모바일 반응형 */
+@media (max-width: 480px) {
+  .item {
+    flex-direction: column; /* 세로 배치 */
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .actionGroup {
+    width: 100%;
+    justify-content: space-between; /* 양 끝 정렬 */
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed rgba(0, 0, 0, 0.1); /* 구분선 */
+  }
 }

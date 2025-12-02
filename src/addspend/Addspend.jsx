@@ -30,6 +30,7 @@ export default function AddSpend({ onAdd }) {
     setDate(getCurrentDate());
   };
 
+  // 시간을 가져오는 함수
   const getCurrentTime = () => {
     const now = new Date();
     // 시간을 '00' 형식으로 포맷팅 (예: 9 -> 09)
