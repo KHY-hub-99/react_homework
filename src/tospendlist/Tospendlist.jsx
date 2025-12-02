@@ -20,7 +20,7 @@ export default function Tospendlist({ filter, onTotalChange }) {
 
   const total = filtered.reduce((sum, item) => {
     if (item.status === "complete") {
-      return sum + extractPrice(item.money);
+      return sum + parseInt(item.money);
     }
     return sum;
   }, 0);
@@ -58,14 +58,14 @@ function readTospendFromLocalStorage() {
   return tospends ? JSON.parse(tospends) : [];
 }
 
-function extractPrice(money) {
-  if (typeof money !== "string") {
-    return 0;
-  }
-  const cleanedMoney = money.replace(/,/g, "");
-  const match = cleanedMoney.match(/(\d+)/);
-  if (match) {
-    return parseInt(match[0], 10);
-  }
-  return 0;
-}
+// function extractPrice(money) {
+//   if (typeof money !== "string") {
+//     return 0;
+//   }
+//   const cleanedMoney = money.replace(/,/g, "");
+//   const match = cleanedMoney.match(/(\d+)/);
+//   if (match) {
+//     return parseInt(match[0], 10);
+//   }
+//   return 0;
+// }
