@@ -59,7 +59,11 @@ function readTospendFromLocalStorage() {
 }
 
 function extractPrice(money) {
-  const match = money.match(/(\d+)/);
+  if (typeof money !== "string") {
+    return 0;
+  }
+  const cleanedMoney = money.replace(/,/g, "");
+  const match = cleanedMoney.match(/(\d+)/);
   if (match) {
     return parseInt(match[0], 10);
   }
