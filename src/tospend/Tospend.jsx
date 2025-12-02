@@ -2,7 +2,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import styles from "./Tospend.module.css";
 
 export default function Tospend({ tospend, onUpdate, onDelete }) {
-  const { id, text, status, date, time } = tospend;
+  const { id, place, content, money, status, date, time } = tospend;
   const handleChange = (e) => {
     const status = e.target.checked ? "complete" : "active";
     onUpdate({ ...tospend, status });
@@ -19,7 +19,7 @@ export default function Tospend({ tospend, onUpdate, onDelete }) {
         className={styles.checkbox}
       />
       <label htmlFor={id} className={styles.label}>
-        [{date} {time}] {text}
+        [{date} {time}] {place}/{content}/{money}
       </label>
       <span className={styles.dateTime}>
         <button onClick={handleDelete} className={styles.deleteButton}>

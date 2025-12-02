@@ -20,7 +20,7 @@ export default function Tospendlist({ filter, onTotalChange }) {
 
   const total = filtered.reduce((sum, item) => {
     if (item.status === "complete") {
-      return sum + extractPrice(item.text);
+      return sum + extractPrice(item.money);
     }
     return sum;
   }, 0);
@@ -58,8 +58,8 @@ function readTospendFromLocalStorage() {
   return tospends ? JSON.parse(tospends) : [];
 }
 
-function extractPrice(text) {
-  const match = text.replace(/,/g, "").match(/(\d+)/);
+function extractPrice(money) {
+  const match = money.match(/(\d+)/);
   if (match) {
     return parseInt(match[0], 10);
   }

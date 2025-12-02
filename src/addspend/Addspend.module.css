@@ -14,7 +14,8 @@
 }
 
 /* 폼 상단 라인: 내용 입력 필드를 가로 전체로 확장 */
-.form input[type="text"] {
+.form input[type="text"],
+.form input[type="number"] {
   flex-grow: 1; /* ⬅️ 가로 전체 사용: flex-grow를 1로 설정 */
   flex-basis: 100%; /* ⬅️ 너비를 100%로 설정하여 한 줄을 단독으로 차지 */
   padding: 1rem; /* ⬅️ 세로 높이 확대: padding 증가 */
